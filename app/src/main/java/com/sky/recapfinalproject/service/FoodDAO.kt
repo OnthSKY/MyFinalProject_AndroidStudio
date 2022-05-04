@@ -7,7 +7,7 @@ import com.sky.recapfinalproject.model.Food
 
 @Dao
 interface FoodDAO {
-
+// Suspend function is for applying Coroutine
     @Insert
     suspend fun insertAll(vararg food:Food) : List<Long>
 

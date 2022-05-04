@@ -11,6 +11,7 @@ abstract class FoodDatabase: RoomDatabase() {
 
     abstract fun foodDao(): FoodDAO
 
+    //Singleton
     companion object{
 
         @Volatile private var instance : FoodDatabase? = null
