@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RecapFinalProject</string>
+    <string name="errorTextView">Hata, Tekrar Deneyin</string>>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
