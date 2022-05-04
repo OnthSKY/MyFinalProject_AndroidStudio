@@ -2,6 +2,7 @@ I wrote this project to upgrade my skill with advance course
 MVVM (model-view-viewModel) design pattern has used in project 
 I chose retrofit, rxjava to get JSON data from internet (API) 
 The Data that received from internet, has saved in database with using ROOM
+Data Binding Library was used to get Data information in xml codes
 
 How The Application works ? 
 data be downloaded by app when app be opened. The data is about the food (data is about name and calory)
