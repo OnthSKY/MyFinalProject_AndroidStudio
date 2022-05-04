@@ -13,16 +13,12 @@ class FoodDetailsViewModel(application: Application) : BaseViewModel(application
     fun getData(foodId: Int){
         getDataFromSqlLite(foodId)
     }
+    // data will be got it from database if users touch the recyclerView on FoodListFragment to watch the food details
     private fun getDataFromSqlLite(foodId: Int){
         launch {
 
             val receivedData = FoodDatabase(getApplication()).foodDao().getFood(foodId)
             food.value = receivedData
         }
-    }
-    private fun getDataOffline(){
-        val elma = Food("Elma","15","16","12","10","www.test.com")
-
-        food.value = elma
     }
 }
