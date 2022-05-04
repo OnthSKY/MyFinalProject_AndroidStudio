@@ -1,9 +1,9 @@
-This project had written to upgrade my kotlin && Android skils
+I wrote this project to upgrade my skill with advance course
 MVVM (model-view-viewModel) design pattern has used in project 
-I used retrofit, rxjava to get JSON data from internet (API) 
+I chose retrofit, rxjava to get JSON data from internet (API) 
 The Data that received from internet, has saved in database with using ROOM
 
-Processing The App
+How The Application works ? 
 data be downloaded by app when app be opened. The data is about the food (data is about name and calory)
 food details be opened by app when data will be touched by user (Details are about calory, carbohtdrate, protein, oil and image)
 data will be loading from database when user will go back (this rule about the data's received date from internet)
