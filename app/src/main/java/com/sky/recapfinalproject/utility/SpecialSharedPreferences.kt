@@ -7,6 +7,7 @@ import androidx.preference.PreferenceManager
 
 class SpecialSharedPreferences() {
 
+    //Singleton
     companion object
     {
         private var sharedPreferences : SharedPreferences? = null
