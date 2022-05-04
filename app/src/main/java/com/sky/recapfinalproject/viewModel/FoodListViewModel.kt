@@ -25,15 +25,17 @@ class FoodListViewModel(application: Application) : BaseViewModel(application) {
     private val specialSharedPreferences = SpecialSharedPreferences(getApplication())
 
     fun getData(){
-        val dateNow = System.nanoTime()
         val timeOfSavingData = specialSharedPreferences.getRecordedTime()
         if(timeOfSavingData != null && timeOfSavingData != 0L && System.nanoTime() - timeOfSavingData < updatingTime){
+            // if data has received before
             getDataFromDatabase()
         }else{
+            // if data has not received before
             getDataFromInternet()
         }
     }
 
+    // if user use 'swipe refresh', data will be download from internet
     fun refreshData(){
         getDataFromInternet()
     }
@@ -48,7 +50,7 @@ class FoodListViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith( object : DisposableSingleObserver<ArrayList<Food>>() {
                     override fun onSuccess(t: ArrayList<Food>) {
                         storageInSqlLite(t)
-                        Toast.makeText(getApplication(), "Verileri internetten aldık ", Toast.LENGTH_SHORT).show()
+                    //    Toast.makeText(getApplication(), "Verileri internetten aldık ", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onError(e: Throwable) {
@@ -56,7 +58,6 @@ class FoodListViewModel(application: Application) : BaseViewModel(application) {
                         isLoading.value = false
                         e.printStackTrace()
                     }
-
                 })
         )
     }
@@ -66,7 +67,7 @@ class FoodListViewModel(application: Application) : BaseViewModel(application) {
             val listFood = arrayListOf<Food>()
             listFood.addAll(dao.getAll())
             showData(listFood)
-            Toast.makeText(getApplication(), "Veriler room'dan çekildi", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(getApplication(), "Veriler room'dan çekildi", Toast.LENGTH_SHORT).show()
         }
     }
     private fun storageInSqlLite(listFood : ArrayList<Food>){
@@ -84,22 +85,11 @@ class FoodListViewModel(application: Application) : BaseViewModel(application) {
             showData(listFood)
         }
     }
+
+    // adding data to objects
     private fun showData(t:ArrayList<Food>){
         foods.value = t
         isSuccessful.value = true
         isLoading.value = false
     }
-    private fun getDataOffline() {
-        isLoading.value = true
-
-        val muz = Food("Muz","15","16","12","10","www.test.com")
-        val elma = Food("Elma","15","16","12","10","www.test.com")
-        val armut = Food("Armut","15","16","12","10","www.test.com")
-
-        val listFood = arrayListOf<Food>(muz,elma,armut)
-        foods.value = listFood
-        isSuccessful.value = true
-        isLoading.value = false
-    }
-
 }
