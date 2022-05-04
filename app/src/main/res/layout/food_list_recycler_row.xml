@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="food"
+            type="com.sky.recapfinalproject.model.Food" />
+        <variable
+            name="clickListener"
+            type="com.sky.recapfinalproject.adapter.FoodClickListener" />
+    </data>
 <LinearLayout
 
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:orientation="horizontal">
-
+    android:orientation="horizontal"
+    android:onClick="@{clickListener::viewWasTouched}">
+<TextView
+    android:id="@+id/foodList_recyclerView_food_Id"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:text="@{String.valueOf(food.id)}"
+    > </TextView>
     <ImageView
         android:id="@+id/foodList_recyclerView_foodImageView"
         android:layout_weight="3"
@@ -15,6 +31,7 @@
         android:layout_margin="2dp"
         android:padding="1dp"
         android:scaleType="fitCenter"
+        android:downloadImage="@{food.image}"
         app:srcCompat="@drawable/ic_launcher_background"> </ImageView>
     <LinearLayout
         android:layout_weight="4"
@@ -27,7 +44,7 @@
             android:id="@+id/foodList_recyclerView_foodNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Food Name"
+            android:text="@{food.name}"
             android:textSize="18sp"
             android:textStyle="bold"
             android:padding="1dp"
@@ -40,7 +57,7 @@
             android:id="@+id/foodList_recyclerView_foodCaloryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Food Calory"
+            android:text="@{food.calory}"
             android:textSize="15sp"
             android:textStyle="italic"
             android:textColor="#6A2323"

@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.sky.recapfinalproject.R
+import com.sky.recapfinalproject.databinding.FragmentFoodDetailsBinding
 import com.sky.recapfinalproject.utility.createPlaceHolder
 import com.sky.recapfinalproject.utility.downloadFromInternet
 import com.sky.recapfinalproject.viewModel.FoodDetailsViewModel
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_food_details.*
 class FoodDetailsFragment : Fragment() {
 
     private lateinit var viewModel: FoodDetailsViewModel
+    private lateinit var dataBinding : FragmentFoodDetailsBinding
     private var foodId: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,9 @@ class FoodDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_details, container, false)
+        //return inflater.inflate(R.layout.fragment_food_details, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_food_details,container,false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,13 +51,14 @@ class FoodDetailsFragment : Fragment() {
     fun observerLiveData(){
         viewModel.food.observe(viewLifecycleOwner, Observer{ food ->
             food?.let {
-                context?.let {
+                dataBinding.chosenFood = it
+                /*context?.let {
                     foodDetails_foodImage.downloadFromInternet(food.image, createPlaceHolder(it))
                 }
                 foodDetails_foodName.text = food.name
                 foodDetails_foodCalory.text = food.calory
                 foodDetails_foodCarbohydrate.text = food.carbohydrate
-                foodDetails_foodOil.text = food.oil
+                foodDetails_foodOil.text = food.oil*/
 
             }
         })
