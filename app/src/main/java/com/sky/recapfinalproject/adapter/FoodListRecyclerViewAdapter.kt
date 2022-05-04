@@ -41,6 +41,7 @@ class FoodListRecyclerViewAdapter(val listFood: ArrayList<Food>) : RecyclerView.
         return listFood.size
     }
 
+    // if there is a new data, recylcerView will be renewed
     fun refreshData(newList: ArrayList<Food>){
         listFood.clear()
         listFood.addAll(newList)
